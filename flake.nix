@@ -8,12 +8,14 @@
         pkgs = import nixpkgs { inherit system; };
         jdkToUse = pkgs.jdk17;
         sbtWithJRE = pkgs.sbt.override { jre = jdkToUse; };
+        millWithJRE = pkgs.mill.override { jre = jdkToUse; };
       in
       {
         devShells.default = pkgs.mkShell {
           packages = [
             jdkToUse
             sbtWithJRE
+            millWithJRE
           ];
         };
       }
