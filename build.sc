@@ -5,7 +5,7 @@ import mill.scalajslib._
 import mill.scalajslib.api._
 
 import $ivy.`io.indigoengine::mill-indigo:0.14.1-SNAPSHOT`, millindigo._
-import $ivy.`io.github.davidgregory084::mill-tpolecat::0.3.0`
+import $ivy.`io.github.davidgregory084::mill-tpolecat::0.3.2`
 
 import io.github.davidgregory084.TpolecatModule
 
@@ -53,16 +53,12 @@ object shaders extends mill.Module {
           ivy"io.indigoengine::indigo-extras::$indigoVersion"
         )
 
-      def scalacOptions = T(super.scalacOptions().filterNot(Set("-migration", "-Xsource:3")))
-
       object test extends Tests {
         def ivyDeps = Agg(
           ivy"org.scalameta::munit::0.7.29"
         )
 
         override def moduleKind = T(mill.scalajslib.api.ModuleKind.CommonJSModule)
-
-        def scalacOptions = T(super.scalacOptions().filterNot(Set("-migration", "-Xsource:3")))
       }
 
     }
