@@ -11,15 +11,15 @@ import io.github.davidgregory084.TpolecatModule
 
 object shaders extends mill.Module {
 
-  object patterns extends mill.Module {
+  object basics extends mill.Module {
 
-    object `simple-voronoi` extends ScalaJSModule with MillIndigo with TpolecatModule {
+    object colours extends ScalaJSModule with MillIndigo with TpolecatModule {
       def scalaVersion   = "3.2.1"
       def scalaJSVersion = "1.13.0"
 
       val gameAssetsDirectory: os.Path   = os.pwd / "assets"
       val showCursor: Boolean            = true
-      val title: String                  = "My Game - Made with Indigo"
+      val title: String                  = "Colours"
       val windowStartWidth: Int          = 400
       val windowStartHeight: Int         = 400
       val disableFrameRateLimit: Boolean = false
@@ -62,5 +62,111 @@ object shaders extends mill.Module {
       }
 
     }
+
+    object minimal extends ScalaJSModule with MillIndigo with TpolecatModule {
+      def scalaVersion   = "3.2.1"
+      def scalaJSVersion = "1.13.0"
+
+      val gameAssetsDirectory: os.Path   = os.pwd / "assets"
+      val showCursor: Boolean            = true
+      val title: String                  = "Minimal"
+      val windowStartWidth: Int          = 400
+      val windowStartHeight: Int         = 400
+      val disableFrameRateLimit: Boolean = false
+      val backgroundColor: String        = "black"
+      val electronInstall                = indigoplugin.ElectronInstall.Latest
+
+      def buildGame() =
+        T.command {
+          T {
+            compile()
+            fastOpt()
+            indigoBuild()()
+          }
+        }
+
+      def runGame() =
+        T.command {
+          T {
+            compile()
+            fastOpt()
+            indigoRun()()
+          }
+        }
+
+      val indigoVersion = "0.14.1-SNAPSHOT"
+
+      def ivyDeps =
+        Agg(
+          ivy"io.indigoengine::indigo-json-circe::$indigoVersion",
+          ivy"io.indigoengine::indigo::$indigoVersion",
+          ivy"io.indigoengine::indigo-extras::$indigoVersion"
+        )
+
+      object test extends Tests {
+        def ivyDeps = Agg(
+          ivy"org.scalameta::munit::0.7.29"
+        )
+
+        override def moduleKind = T(mill.scalajslib.api.ModuleKind.CommonJSModule)
+      }
+
+    }
+    
   }
+
+  object patterns extends mill.Module {
+
+    object `simple-voronoi` extends ScalaJSModule with MillIndigo with TpolecatModule {
+      def scalaVersion   = "3.2.1"
+      def scalaJSVersion = "1.13.0"
+
+      val gameAssetsDirectory: os.Path   = os.pwd / "assets"
+      val showCursor: Boolean            = true
+      val title: String                  = "Simple Voronoi"
+      val windowStartWidth: Int          = 400
+      val windowStartHeight: Int         = 400
+      val disableFrameRateLimit: Boolean = false
+      val backgroundColor: String        = "black"
+      val electronInstall                = indigoplugin.ElectronInstall.Latest
+
+      def buildGame() =
+        T.command {
+          T {
+            compile()
+            fastOpt()
+            indigoBuild()()
+          }
+        }
+
+      def runGame() =
+        T.command {
+          T {
+            compile()
+            fastOpt()
+            indigoRun()()
+          }
+        }
+
+      val indigoVersion = "0.14.1-SNAPSHOT"
+
+      def ivyDeps =
+        Agg(
+          ivy"io.indigoengine::indigo-json-circe::$indigoVersion",
+          ivy"io.indigoengine::indigo::$indigoVersion",
+          ivy"io.indigoengine::indigo-extras::$indigoVersion"
+        )
+
+      object test extends Tests {
+        def ivyDeps = Agg(
+          ivy"org.scalameta::munit::0.7.29"
+        )
+
+        override def moduleKind = T(mill.scalajslib.api.ModuleKind.CommonJSModule)
+      }
+
+    }
+
+  }
+
 }
