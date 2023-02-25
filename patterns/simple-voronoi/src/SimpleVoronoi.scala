@@ -3,7 +3,7 @@ import indigo.*
 import scala.scalajs.js.annotation._
 
 @JSExportTopLevel("IndigoGame")
-object ShaderGame extends IndigoShader:
+object SimpleVoronoi extends IndigoShader:
 
   val config: GameConfig          =
     GameConfig.default
