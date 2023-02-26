@@ -1,4 +1,3 @@
-
 import $ivy.`com.lihaoyi::scalatags:0.8.2`
 
 object HomePage {
@@ -7,37 +6,19 @@ object HomePage {
 
   def page(projectList: List[String]) =
     html(
-      head(title := "Dave's Shader List")(
-        meta(charset := "UTF-8"),
+      head(title     := "Dave's Shader List")(
+        meta(charset := "UTF-8")
       ),
       body(
+        p(
+          "These open in a new target for now because the back button won't work... I'll fix it soon!"
+        ),
         projectList.map { prj =>
-          p(prj)
+          p(
+            a(href := s"./$prj", target := "_blank")(prj)
+          )
         }
       )
     )
 
 }
-
-// Not cross compiled for Scala 2.13...
-// import $ivy.`io.indigoengine::tyrian:0.6.1`
-
-// object HomePage {
-
-//   import tyrian.*
-//   import tyrian.Html.*
-
-//   def page(projectList: List[String]): Html[Nothing] =
-//     html(
-//       head(
-//         meta(charset := "UTF-8"),
-//         title("Dave's Shader List")
-//       ),
-//       body(
-//         projectList.map { prj =>
-//           p(prj)
-//         }
-//       )
-//     )
-
-// }

@@ -44,18 +44,24 @@ def make(linkAll: Boolean) = {
   os.remove.all(docs)
   os.makeDir.all(docs)
 
-  // Build a folder structure
-  // Insert template HTML into each leaf
-  // Copy the built JS scripts into each
-  val projectListPaths: List[os.Path] =
+  // Generate relative paths
+  val projectListRelPaths: List[os.RelPath] =
     projectList.map { p =>
-      os.pwd / os.RelPath(p.replaceAllLiterally(".", "/"))
+      os.RelPath(p.replaceAllLiterally(".", "/"))
     }
 
-  println(projectListPaths)
+  // Copy all the built shaders into the right docs directory
+  projectListRelPaths.foreach { p =>
+    val outPath = (os.pwd / "docs") / p
+    os.makeDir.all(outPath)
+
+    val buildDir = os.pwd / "out" / p / "indigoBuildFull.dest"
+
+    os.list(buildDir).toList.foreach { p =>
+      os.copy(p, outPath / p.last)
+    }
+  }
 
   // Build an index page with links to all the sub folders
-  os.write(docs / "index.html", templates.HomePage.page(projectList))
-
-  // Move it all into the docs/ folder.
+  os.write(docs / "index.html", templates.HomePage.page(projectListRelPaths.map(_.toString())))
 }
