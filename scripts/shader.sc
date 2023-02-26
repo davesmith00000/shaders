@@ -27,7 +27,7 @@ trait ShaderModule extends ScalaJSModule with MillIndigo with TpolecatModule {
     T.command {
       T {
         compile()
-        fastLinkJS()
+        fastOpt()
         indigoBuild()()
       }
     }
@@ -45,7 +45,7 @@ trait ShaderModule extends ScalaJSModule with MillIndigo with TpolecatModule {
     T.command {
       T {
         compile()
-        fastLinkJS()
+        fastOpt()
         indigoRun()()
       }
     }
