@@ -47,6 +47,12 @@ def make(linkAll: Boolean) = {
   // Build a folder structure
   // Insert template HTML into each leaf
   // Copy the built JS scripts into each
+  val projectListPaths: List[os.Path] =
+    projectList.map { p =>
+      os.pwd / os.RelPath(p.replaceAllLiterally(".", "/"))
+    }
+
+  println(projectListPaths)
 
   // Build an index page with links to all the sub folders
   os.write(docs / "index.html", templates.HomePage.page(projectList))
