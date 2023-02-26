@@ -32,10 +32,10 @@ def make(linkAll: Boolean) = {
   val projectList =
     Stream.continually(cleanUpNames.stdout.readLine()).takeWhile(_ != null).toList
 
-  // fullLinkJS all the shaders
+  // Build all the shaders
   if (linkAll) {
     projectList.foreach { pjt =>
-      os.proc("mill", s"$pjt.fullLinkJS").call(cwd = os.pwd)
+      os.proc("mill", s"$pjt.buildGameFull").call(cwd = os.pwd)
     }
   }
 
