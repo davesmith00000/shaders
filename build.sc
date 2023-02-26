@@ -24,6 +24,56 @@ object shaders extends mill.Module {
 
   }
 
+  def genSite(linkAll: Boolean = true) = T.command {
+    // Extract all sub-projects
+    val findProjects = os
+      .proc(
+        "mill",
+        "resolve",
+        "__.fastLinkJS"
+      )
+      .spawn(cwd = os.pwd)
+
+    val filterOutTestProjects = os
+      .proc(
+        "grep",
+        "-v",
+        "test"
+      )
+      .spawn(cwd = os.pwd, stdin = findProjects.stdout)
+
+    val cleanUpNames = os
+      .proc(
+        "sed",
+        "s/.fastLinkJS//"
+      )
+      .spawn(cwd = os.pwd, stdin = filterOutTestProjects.stdout)
+
+    val projectList =
+      Stream.continually(cleanUpNames.stdout.readLine()).takeWhile(_ != null).toList
+
+    // fullLinkJS all the shaders
+    if(linkAll) {
+      projectList.foreach { pjt =>
+        os.proc("mill", s"$pjt.fullLinkJS").call(cwd = os.pwd)
+      }
+    }
+
+    // Recreate the docs directory
+    val docs = os.pwd / "docs"
+    os.remove.all(docs)
+    os.makeDir.all(docs)
+
+    // Build a folder structure
+    // Insert template HTML into each leaf
+    // Copy the built JS scripts into each
+
+    // Build an index page with links to all the sub folders
+    os.write(docs / "index.html", HomePage.page(projectList))
+
+    // Move it all into the docs/ folder.
+  }
+
 }
 
 trait ShaderModule extends ScalaJSModule with MillIndigo with TpolecatModule {
@@ -76,3 +126,46 @@ trait ShaderModule extends ScalaJSModule with MillIndigo with TpolecatModule {
   }
 
 }
+
+import $ivy.`com.lihaoyi::scalatags:0.8.2`
+
+object HomePage {
+
+  import scalatags.Text.all._
+
+  def page(projectList: List[String]) =
+    html(
+      head(title := "Dave's Shader List")(
+        meta(charset := "UTF-8"),
+      ),
+      body(
+        projectList.map { prj =>
+          p(prj)
+        }
+      )
+    )
+
+}
+
+// Not cross compiled for Scala 2.13...
+// import $ivy.`io.indigoengine::tyrian:0.6.1`
+
+// object HomePage {
+
+//   import tyrian.*
+//   import tyrian.Html.*
+
+//   def page(projectList: List[String]): Html[Nothing] =
+//     html(
+//       head(
+//         meta(charset := "UTF-8"),
+//         title("Dave's Shader List")
+//       ),
+//       body(
+//         projectList.map { prj =>
+//           p(prj)
+//         }
+//       )
+//     )
+
+// }
