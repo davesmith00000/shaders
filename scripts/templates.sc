@@ -7,18 +7,52 @@ object HomePage {
   def page(projectList: List[String]) =
     html(
       head(title     := "Dave's Shader List")(
-        meta(charset := "UTF-8")
+        meta(charset := "UTF-8")//,
+        // script(src := "https://cdn.tailwindcss.com")()
       ),
       body(
         p(
-          "These open in a new target for now because the back button won't work... I'll fix it soon!"
+          "Click on any of the links below."
         ),
-        projectList.map { prj =>
-          p(
-            a(href := s"./$prj", target := "_blank")(prj)
-          )
-        }
+        ul()(
+          projectList.map { prj =>
+            li(
+              a(href := s"./$prj")(prj)
+            )
+          }
+        )
       )
     )
+
+}
+
+object IndigoIndex {
+
+  def page(pageName: String): String =
+    s"""
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>$pageName</title>
+    <style>
+      body {
+        background-color: black;
+      }
+      p {
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="indigo-container"></div>
+    <script type="text/javascript" src="scripts/out.js"></script>
+    <script type="text/javascript">
+      IndigoGame.launch("indigo-container")
+    </script>
+    <p>Hit 'f' for fullscreen.</p>
+  </body>
+</html>
+    """.trim
 
 }

@@ -57,9 +57,19 @@ def make(linkAll: Boolean) = {
 
     val buildDir = os.pwd / "out" / p / "indigoBuildFull.dest"
 
-    os.list(buildDir).toList.foreach { p =>
-      os.copy(p, outPath / p.last)
-    }
+    os.list(buildDir)
+      .toList
+      .filterNot { p =>
+        p.last == "cordova.js" ||
+        p.last == "indigo-support.js" ||
+        p.last == "index.html"
+      }
+      .foreach { p =>
+        os.copy(p, outPath / p.last)
+      }
+
+    // Write a custom index page
+    os.write(outPath / "index.html", templates.IndigoIndex.page(outPath.last))
   }
 
   // Build an index page with links to all the sub folders
