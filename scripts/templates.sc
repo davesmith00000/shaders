@@ -19,13 +19,30 @@ object HomePage {
           p(
             "Click on any of the links below."
           ),
-          ul()(
-            projectList.map { prj =>
-              li(
-                a(href := s"./$prj")(prj)
+          projectList
+            .map(_.split("/").toList.drop(1))
+            .map {
+              case List(category, name) =>
+                category -> name
+
+              case unexpected =>
+                throw new Exception("Failed trying to convert this to a tuple: " + unexpected)
+            }
+            .groupBy(_._1)
+            .toList
+            .map(p => p._1 -> p._2.map(_._2))
+            .map { case (category, sections) =>
+              div()(
+                p(category.capitalize),
+                ul()(
+                  sections.map { prj =>
+                    li(
+                      a(href := s"./shaders/$category/$prj")(prj.replaceAllLiterally("-", " ").capitalize)
+                    )
+                  }
+                )
               )
             }
-          )
         )
       )
 
