@@ -21,6 +21,16 @@ object shaders extends mill.Module {
 
   }
 
+  object demos extends mill.Module {
+
+    object campfire extends shader.ShaderModule {
+      val title: String          = "Campfire"
+      override val windowStartWidth: Int  = 192
+      override val windowStartHeight: Int = 192
+    }
+
+  }
+
   object patterns extends mill.Module {
 
     object `simple-voronoi` extends shader.ShaderModule { val title: String = "Simple Voronoi" }
