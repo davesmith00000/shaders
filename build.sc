@@ -31,6 +31,12 @@ object shaders extends mill.Module {
 
   }
 
+  object noise extends mill.Module {
+
+    object `white-noise` extends shader.ShaderModule { val title: String = "White Noise" }
+
+  }
+
   object patterns extends mill.Module {
 
     object `simple-voronoi` extends shader.ShaderModule { val title: String = "Simple Voronoi" }
