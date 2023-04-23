@@ -47,6 +47,8 @@ object shaders extends mill.Module {
 
     object circle extends shader.ShaderModule { val title: String = "Circle SDF" }
 
+    object square extends shader.ShaderModule { val title: String = "Square SDF" }
+
   }
 
 }
