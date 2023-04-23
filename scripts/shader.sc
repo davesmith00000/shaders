@@ -3,7 +3,7 @@ import mill.scalalib._
 import mill.scalajslib._
 import mill.scalajslib.api._
 
-import $ivy.`io.indigoengine::mill-indigo:0.14.1-SNAPSHOT`, millindigo._
+import $ivy.`io.indigoengine::mill-indigo:0.15.0-RC1`, millindigo._
 
 import $ivy.`io.github.davidgregory084::mill-tpolecat::0.3.2`
 import io.github.davidgregory084.TpolecatModule
@@ -12,7 +12,7 @@ trait ShaderModule extends ScalaJSModule with MillIndigo with TpolecatModule {
   val title: String
 
   def scalaVersion   = "3.2.1"
-  def scalaJSVersion = "1.13.0"
+  def scalaJSVersion = "1.13.1"
 
   val gameAssetsDirectory: os.Path   = os.pwd / "assets"
   val showCursor: Boolean            = true
@@ -58,7 +58,7 @@ trait ShaderModule extends ScalaJSModule with MillIndigo with TpolecatModule {
       }
     }
 
-  val indigoVersion = "0.14.1-SNAPSHOT"
+  val indigoVersion = "0.15.0-RC1"
 
   def ivyDeps =
     Agg(
