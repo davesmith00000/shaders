@@ -29,6 +29,8 @@ object shaders extends mill.Module {
       override val windowStartHeight: Int = 192
     }
 
+    object pulsingbox extends shader.ShaderModule { val title: String = "PulsingBox" }
+
   }
 
   object noise extends mill.Module {
