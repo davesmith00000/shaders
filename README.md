@@ -35,3 +35,19 @@ If you'd like to compile and test everything, you can do the following:
 ./mill shaders.__.compile
 ./mill shaders.__.test
 ```
+
+## Regenerating the website
+
+This command re-generates the website into the docs folder. It will take quite a while...
+
+```sh
+./mill shaders.genSite
+```
+
+If you then `cd docs/`, you can run the following to run the site locally.
+
+
+```sh
+npm install http-server
+npx http-server -c-1 
+```
