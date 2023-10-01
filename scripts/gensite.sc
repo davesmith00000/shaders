@@ -7,9 +7,9 @@ def make(linkAll: Boolean) = {
   // Extract all sub-projects
   val findProjects = os
     .proc(
-      "mill",
+      "./mill",
       "resolve",
-      "__.fastLinkJS"
+      "__.fullLinkJS"
     )
     .spawn(cwd = os.pwd)
 
@@ -24,7 +24,7 @@ def make(linkAll: Boolean) = {
   val cleanUpNames = os
     .proc(
       "sed",
-      "s/.fastLinkJS//"
+      "s/.fullLinkJS//"
     )
     .spawn(cwd = os.pwd, stdin = filterOutTestProjects.stdout)
 
@@ -34,7 +34,7 @@ def make(linkAll: Boolean) = {
   // Build all the shaders
   if (linkAll) {
     projectList.foreach { pjt =>
-      os.proc("mill", s"$pjt.buildGameFull").call(cwd = os.pwd)
+      os.proc("./mill", s"$pjt.buildGameFull").call(cwd = os.pwd)
     }
   }
 

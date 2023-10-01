@@ -64,7 +64,7 @@ object IndigoIndex {
         ),
         body(
           div(id := "indigo-container")(),
-          script(tpe := "text/javascript", src := "scripts/out.js")(),
+          script(tpe := "text/javascript", src := "scripts/main.js")(),
           script(tpe := "text/javascript")(
             """IndigoGame.launch('indigo-container')"""
           ),

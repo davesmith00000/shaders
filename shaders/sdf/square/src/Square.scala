@@ -7,7 +7,7 @@ import sdf.square.*
 object SquareSDF extends IndigoShader:
 
   val config: GameConfig =
-    ShaderConfig.config
+    ShaderConfig.config.noResize
 
   val assets: Set[AssetType]      = ShaderAssets.assets.assetSet
   val channel0: Option[AssetPath] = None

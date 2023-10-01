@@ -7,7 +7,7 @@ import demos.campfire.*
 object Campfire extends IndigoShader:
 
   val config: GameConfig =
-    ShaderConfig.config
+    ShaderConfig.config.noResize
       .withViewport(192, 192)
 
   val assets: Set[AssetType]      = ShaderAssets.assets.assetSet
