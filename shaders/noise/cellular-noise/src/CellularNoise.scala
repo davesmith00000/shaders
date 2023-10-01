@@ -88,13 +88,17 @@ object CustomShader:
         d1 = min(d1a, d2) // F1 is now in d1
         d2 = max(d1a, d2) // Swap to keep candidates for F2
 
-        d1 = if d1.x < d1.y then d1 else d1.yxz // Swap if smaller
-        d1 = if d1.x < d1.z then d1 else d1.zyx // F1 is in d1.x
-        d1 = vec3(d1.x, min(d1.yz, d2.yz))      // F2 is now not in d2.yz
-        d1 = vec3(d1.x, min(d1.y, d1.z), d1.z)  // nor in  d1.z
-        d1 = vec3(d1.x, min(d1.y, d2.x), d1.z)  // F2 is in d1.y, we're done.
+        val d1Flip1 = if (d1.x < d1.y) d1 else vec3(d1.y, d1.x, d1.z) // Swap if smaller
+        val d1Flip2 =
+          if (d1Flip1.x < d1Flip1.z) d1Flip1
+          else vec3(d1Flip1.z, d1Flip1.y, d1Flip1.x) // F1 is in d1.x
 
-        sqrt(d1.xy)
+        var d1Flip3: vec3 = vec3(d1Flip2.x, min(d1Flip2.yz, d2.yz)) // F2 is now not in d2.yz
+        d1Flip3 = vec3(d1Flip3.x, min(d1Flip3.y, d1Flip3.z), d1Flip3.z) // nor in  d1Flip3.z
+        d1Flip3 =
+          vec3(d1Flip3.x, min(d1Flip3.y, d2.x), d1Flip3.z) // F2 is in d1Flip3.y, we're done.
+
+        sqrt(d1Flip3.xy)
       }
 
       def fragment(color: vec4): vec4 =
