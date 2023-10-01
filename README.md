@@ -51,3 +51,15 @@ If you then `cd docs/`, you can run the following to run the site locally.
 npm install http-server
 npx http-server -c-1 
 ```
+
+## Further reading
+
+Nothing I've done here or anywhere else with regard to shaders is original.
+
+Here are a few links to shader related goodness, by people much cleverer than myself.
+
+- [https://thebookofshaders.com/](https://thebookofshaders.com/)
+- [https://iquilezles.org/articles/](https://iquilezles.org/articles/)
+- [https://github.com/ashima/webgl-noise](https://github.com/ashima/webgl-noise)
+- [https://www.shadertoy.com/](https://www.shadertoy.com/)
+
