@@ -20,11 +20,11 @@ trait ShaderModule extends MillIndigo with TpolecatModule {
       .withAssetDirectory(os.RelPath.rel / "assets")
       .withBackgroundColor("black")
 
-  def makeIndigoGenerators(fqpn: String): IndigoGenerators =
+  def makeIndigoGenerators(fqpn: String, configFileName: String, assetsFileName: String): IndigoGenerators =
     IndigoGenerators
       .mill(fqpn)
-      .generateConfig("ShaderConfig", indigoOptions)
-      .listAssets("ShaderAssets", indigoOptions.assets)
+      .generateConfig(configFileName, indigoOptions)
+      .listAssets(assetsFileName, indigoOptions.assets)
 
   def buildGame() =
     T.command {

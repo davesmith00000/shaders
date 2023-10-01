@@ -1,15 +1,15 @@
 import indigo.*
 
 import scala.scalajs.js.annotation.*
-import noise.gradientnoise.*
+import generated.*
 
 @JSExportTopLevel("IndigoGame")
 object GradientNoise extends IndigoShader:
 
   val config: GameConfig =
-    ShaderConfig.config.noResize
+    GradientNoiseConfig.config.noResize
 
-  val assets: Set[AssetType]      = ShaderAssets.assets.assetSet
+  val assets: Set[AssetType]      = GradientNoiseAssets.assets.assetSet
   val channel0: Option[AssetPath] = None
   val channel1: Option[AssetPath] = None
   val channel2: Option[AssetPath] = None

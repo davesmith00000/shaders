@@ -1,15 +1,15 @@
 import indigo.*
 
 import scala.scalajs.js.annotation.*
-import demos.pulsingbox.*
+import generated.*
 
 @JSExportTopLevel("IndigoGame")
 object PulsingBox extends IndigoShader:
 
   val config: GameConfig =
-    ShaderConfig.config.noResize
+    PulsingBoxConfig.config.noResize
 
-  val assets: Set[AssetType]      = ShaderAssets.assets.assetSet
+  val assets: Set[AssetType]      = PulsingBoxAssets.assets.assetSet
   val channel0: Option[AssetPath] = None
   val channel1: Option[AssetPath] = None
   val channel2: Option[AssetPath] = None

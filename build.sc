@@ -4,7 +4,7 @@ import mill.scalalib._
 import mill.scalajslib._
 import mill.scalajslib.api._
 
-import $file.scripts.shader
+import $file.scripts.shadermodule
 import $file.scripts.templates
 import $file.scripts.gensite
 
@@ -18,92 +18,100 @@ object shaders extends mill.Module {
 
   object basics extends mill.Module {
 
-    object colours extends shader.ShaderModule {
+    object colours extends shadermodule.ShaderModule {
       val indigoOptions: IndigoOptions =
         makeIndigoOptions("Colours")
 
       val indigoGenerators: IndigoGenerators =
-        makeIndigoGenerators("basics.colors")
+        makeIndigoGenerators("generated", "ColoursConfig", "ColoursAssets")
     }
-    object minimal extends shader.ShaderModule {
+    object minimal extends shadermodule.ShaderModule {
       val indigoOptions: IndigoOptions =
         makeIndigoOptions("Minimal")
 
       val indigoGenerators: IndigoGenerators =
-        makeIndigoGenerators("basics.minimal")
+        makeIndigoGenerators("generated", "MinimalConfig", "MinimalAssets")
     }
 
   }
 
   object demos extends mill.Module {
 
-    object campfire extends shader.ShaderModule {
+    object campfire extends shadermodule.ShaderModule {
       val indigoOptions: IndigoOptions =
         makeIndigoOptions("Campfire")
           .withWindowSize(192, 192)
 
       val indigoGenerators: IndigoGenerators =
-        makeIndigoGenerators("demos.campfire")
+        makeIndigoGenerators("generated", "CampfireConfig", "CampfireAssets")
     }
 
-    object pulsingbox extends shader.ShaderModule {
+    object pulsingbox extends shadermodule.ShaderModule {
       val indigoOptions: IndigoOptions =
         makeIndigoOptions("PulsingBox")
 
       val indigoGenerators: IndigoGenerators =
-        makeIndigoGenerators("demos.pulsingbox")
+        makeIndigoGenerators("generated", "PulsingBoxConfig", "PulsingBoxAssets")
     }
 
   }
 
   object noise extends mill.Module {
 
-    object `white-noise` extends shader.ShaderModule {
+    object `cellular-noise` extends shadermodule.ShaderModule {
       val indigoOptions: IndigoOptions =
-        makeIndigoOptions("White Noise")
+        makeIndigoOptions("Cellular Noise")
 
       val indigoGenerators: IndigoGenerators =
-        makeIndigoGenerators("noise.whitenoise")
+        makeIndigoGenerators("generated", "CellularNoiseConfig", "CellularNoiseAssets")
     }
 
-    object `gradient-noise` extends shader.ShaderModule {
+    object `gradient-noise` extends shadermodule.ShaderModule {
       val indigoOptions: IndigoOptions =
         makeIndigoOptions("Gradient Noise")
 
       val indigoGenerators: IndigoGenerators =
-        makeIndigoGenerators("noise.gradientnoise")
+        makeIndigoGenerators("generated", "GradientNoiseConfig", "GradientNoiseAssets")
+    }
+
+    object `white-noise` extends shadermodule.ShaderModule {
+      val indigoOptions: IndigoOptions =
+        makeIndigoOptions("White Noise")
+
+      val indigoGenerators: IndigoGenerators =
+        makeIndigoGenerators("generated", "WhiteNoiseConfig", "WhiteNoiseAssets")
     }
 
   }
 
   object patterns extends mill.Module {
 
-    object `simple-voronoi` extends shader.ShaderModule {
+    object `simple-voronoi` extends shadermodule.ShaderModule {
       val indigoOptions: IndigoOptions =
         makeIndigoOptions("Simple Voronoi")
 
       val indigoGenerators: IndigoGenerators =
-        makeIndigoGenerators("patterns.simplevoronoi")
+        makeIndigoGenerators("generated", "SimpleVoronoiConfig", "SimpleVoronoiAssets")
     }
 
   }
 
   object sdf extends mill.Module {
 
-    object circle extends shader.ShaderModule {
+    object circle extends shadermodule.ShaderModule {
       val indigoOptions: IndigoOptions =
         makeIndigoOptions("Circle SDF")
 
       val indigoGenerators: IndigoGenerators =
-        makeIndigoGenerators("sdf.circle")
+        makeIndigoGenerators("generated", "CircleSDFConfig", "CircleSDFAssets")
     }
 
-    object square extends shader.ShaderModule {
+    object square extends shadermodule.ShaderModule {
       val indigoOptions: IndigoOptions =
         makeIndigoOptions("Square SDF")
 
       val indigoGenerators: IndigoGenerators =
-        makeIndigoGenerators("sdf.square")
+        makeIndigoGenerators("generated", "SquareSDFConfig", "SquareSDFAssets")
     }
 
   }

@@ -1,16 +1,15 @@
 import indigo.*
 
 import scala.scalajs.js.annotation.*
-import demos.campfire.*
+import generated.*
 
 @JSExportTopLevel("IndigoGame")
 object Campfire extends IndigoShader:
 
   val config: GameConfig =
-    ShaderConfig.config.noResize
-      .withViewport(192, 192)
+    CampfireConfig.config.noResize
 
-  val assets: Set[AssetType]      = ShaderAssets.assets.assetSet
+  val assets: Set[AssetType]      = CampfireAssets.assets.assetSet
   val channel0: Option[AssetPath] = Option(AssetPath("assets/fire-background.png"))
   val channel1: Option[AssetPath] = Option(AssetPath("assets/campfire.png"))
   val channel2: Option[AssetPath] = None

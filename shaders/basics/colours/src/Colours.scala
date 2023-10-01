@@ -1,15 +1,15 @@
 import indigo.*
 
 import scala.scalajs.js.annotation.*
-import basics.colors.*
+import generated.*
 
 @JSExportTopLevel("IndigoGame")
 object Colours extends IndigoShader:
 
   val config: GameConfig =
-    ShaderConfig.config.noResize
+    ColoursConfig.config.noResize
 
-  val assets: Set[AssetType]      = ShaderAssets.assets.assetSet
+  val assets: Set[AssetType]      = ColoursAssets.assets.assetSet
   val channel0: Option[AssetPath] = None
   val channel1: Option[AssetPath] = None
   val channel2: Option[AssetPath] = None
