@@ -9,3 +9,29 @@ All the shaders are written in [Ultraviolet](https://github.com/PurpleKingdomGam
 I'm doing this as a learning exercise and to build up a collection of reference material.
 
 Some of the code will necessarily be based on / adapted from the work of others. I will endevour to attribute the original authors (in the code) wherever possible, please feel free raise an issue on the repo if you feel I haven't done a good enough job in this regard.
+
+## Setting up Mill using Millw
+
+[Millw](https://github.com/lefou/millw) is already in the repo, and should 'just work' as a drop in replacement for the normal Mill executable, but just in case, you can install it like this:
+
+```sh
+curl -L https://raw.githubusercontent.com/lefou/millw/0.4.7/millw > mill && chmod +x mill
+```
+
+## Running the shaders locally
+
+The shaders are arranged in a tree based on their folders, with the 'shaders' folder ommited. So to run the campfire shader, you would look at the directory structure, and do:
+
+```sh
+./mill shaders.demos.campfire.runGame
+./mill 'shaders.noise.white-noise.runGame'
+```
+
+Note the single quotes that allow you to run the hyphenated module in zsh.
+
+If you'd like to compile and test everything, you can do the following:
+
+```sh
+./mill shaders.__.compile
+./mill shaders.__.test
+```

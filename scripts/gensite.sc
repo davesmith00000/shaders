@@ -29,7 +29,7 @@ def make(linkAll: Boolean) = {
     .spawn(cwd = os.pwd, stdin = filterOutTestProjects.stdout)
 
   val projectList =
-    Stream.continually(cleanUpNames.stdout.readLine()).takeWhile(_ != null).toList
+    LazyList.continually(cleanUpNames.stdout.readLine()).takeWhile(_ != null).toList
 
   // Build all the shaders
   if (linkAll) {
@@ -46,7 +46,7 @@ def make(linkAll: Boolean) = {
   // Generate relative paths
   val projectListRelPaths: List[os.RelPath] =
     projectList.map { p =>
-      os.RelPath(p.replaceAllLiterally(".", "/"))
+      os.RelPath(p.replace(".", "/"))
     }
 
   // Copy all the built shaders into the right docs directory

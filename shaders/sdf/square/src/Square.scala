@@ -1,16 +1,15 @@
 import indigo.*
 
-import scala.scalajs.js.annotation._
+import scala.scalajs.js.annotation.*
+import sdf.square.*
 
 @JSExportTopLevel("IndigoGame")
 object SquareSDF extends IndigoShader:
 
   val config: GameConfig =
-    GameConfig.default
-      .withFrameRateLimit(FPS.`60`)
-      .withViewport(400, 400)
+    ShaderConfig.config
 
-  val assets: Set[AssetType]      = Set()
+  val assets: Set[AssetType]      = ShaderAssets.assets.assetSet
   val channel0: Option[AssetPath] = None
   val channel1: Option[AssetPath] = None
   val channel2: Option[AssetPath] = None

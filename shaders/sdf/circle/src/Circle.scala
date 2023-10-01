@@ -1,16 +1,15 @@
 import indigo.*
 
-import scala.scalajs.js.annotation._
+import scala.scalajs.js.annotation.*
+import sdf.circle.*
 
 @JSExportTopLevel("IndigoGame")
 object CircleSDF extends IndigoShader:
 
   val config: GameConfig =
-    GameConfig.default
-      .withFrameRateLimit(FPS.`60`)
-      .withViewport(400, 400)
+    ShaderConfig.config
 
-  val assets: Set[AssetType]      = Set()
+  val assets: Set[AssetType]      = ShaderAssets.assets.assetSet
   val channel0: Option[AssetPath] = None
   val channel1: Option[AssetPath] = None
   val channel2: Option[AssetPath] = None
@@ -42,7 +41,7 @@ object CustomShader:
         // The calculation assumes we're centered on the origin.
         val sdf = sdCircle(env.UV - 0.5f, 0.25f)
 
-        // Inside the circle is a negative value, so we flip it, and use step to get a hard edge. 
+        // Inside the circle is a negative value, so we flip it, and use step to get a hard edge.
         val col = step(0.0f, -sdf)
 
         // Output as a grey scale.

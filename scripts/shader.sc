@@ -3,30 +3,34 @@ import mill.scalalib._
 import mill.scalajslib._
 import mill.scalajslib.api._
 
-import $ivy.`io.indigoengine::mill-indigo:0.15.0-RC1`, millindigo._
+import $ivy.`io.indigoengine::mill-indigo:0.15.0`, millindigo._
 
-import $ivy.`io.github.davidgregory084::mill-tpolecat::0.3.2`
+import $ivy.`io.github.davidgregory084::mill-tpolecat::0.3.5`
 import io.github.davidgregory084.TpolecatModule
 
-trait ShaderModule extends ScalaJSModule with MillIndigo with TpolecatModule {
-  val title: String
+trait ShaderModule extends MillIndigo with TpolecatModule {
+  def scalaVersion   = "3.3.1"
+  def scalaJSVersion = "1.13.2"
 
-  def scalaVersion   = "3.2.1"
-  def scalaJSVersion = "1.13.1"
+  def makeIndigoOptions(title: String): IndigoOptions =
+    IndigoOptions.defaults
+      .withTitle(title)
+      .withWindowSize(400, 400)
+      .useElectronVersion("25.8.4")
+      .withAssetDirectory(os.RelPath.rel / "assets")
+      .withBackgroundColor("black")
 
-  val gameAssetsDirectory: os.Path   = os.pwd / "assets"
-  val showCursor: Boolean            = true
-  val windowStartWidth: Int          = 400
-  val windowStartHeight: Int         = 400
-  val disableFrameRateLimit: Boolean = false
-  val backgroundColor: String        = "black"
-  val electronInstall                = indigoplugin.ElectronInstall.Latest
+  def makeIndigoGenerators(fqpn: String): IndigoGenerators =
+    IndigoGenerators
+      .mill(fqpn)
+      .generateConfig("ShaderConfig", indigoOptions)
+      .listAssets("ShaderAssets", indigoOptions.assets)
 
   def buildGame() =
     T.command {
       T {
         compile()
-        fastOpt()
+        fastLinkJS()
         indigoBuild()()
       }
     }
@@ -35,7 +39,7 @@ trait ShaderModule extends ScalaJSModule with MillIndigo with TpolecatModule {
     T.command {
       T {
         compile()
-        fullOpt()
+        fullLinkJS()
         indigoBuildFull()()
       }
     }
@@ -44,7 +48,7 @@ trait ShaderModule extends ScalaJSModule with MillIndigo with TpolecatModule {
     T.command {
       T {
         compile()
-        fastOpt()
+        fastLinkJS()
         indigoRun()()
       }
     }
@@ -53,12 +57,12 @@ trait ShaderModule extends ScalaJSModule with MillIndigo with TpolecatModule {
     T.command {
       T {
         compile()
-        fullOpt()
+        fullLinkJS()
         indigoRunFull()()
       }
     }
 
-  val indigoVersion = "0.15.0-RC1"
+  val indigoVersion = "0.15.0"
 
   def ivyDeps =
     Agg(
@@ -67,12 +71,14 @@ trait ShaderModule extends ScalaJSModule with MillIndigo with TpolecatModule {
       ivy"io.indigoengine::indigo-extras::$indigoVersion"
     )
 
-  object test extends Tests {
+  object test extends ScalaJSTests {
     def ivyDeps = Agg(
       ivy"org.scalameta::munit::0.7.29"
     )
 
     override def moduleKind = T(mill.scalajslib.api.ModuleKind.CommonJSModule)
+
+    def testFramework: mill.T[String] = T("munit.Framework")
   }
 
 }

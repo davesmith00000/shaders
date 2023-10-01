@@ -7,7 +7,7 @@ object HomePage {
   def page(projectList: List[String]) =
     "<!DOCTYPE html>" +
       html(
-        head(title     := "Dave's Shader List")(
+        head(title := "Dave's Shader List")(
           meta(charset := "UTF-8"),
           link(
             rel  := "stylesheet",
@@ -37,7 +37,9 @@ object HomePage {
                 ul()(
                   sections.map { prj =>
                     li(
-                      a(href := s"./shaders/$category/$prj")(prj.replaceAllLiterally("-", " ").capitalize)
+                      a(href := s"./shaders/$category/$prj")(
+                        prj.replace("-", " ").capitalize
+                      )
                     )
                   }
                 )
@@ -53,7 +55,7 @@ object IndigoIndex {
   def page(pageName: String) =
     "<!DOCTYPE html>" +
       html(
-        head(title     := pageName)(
+        head(title := pageName)(
           meta(charset := "UTF-8"),
           link(
             rel  := "stylesheet",

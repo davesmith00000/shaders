@@ -1,16 +1,16 @@
 import indigo.*
 
-import scala.scalajs.js.annotation._
+import scala.scalajs.js.annotation.*
+import demos.campfire.*
 
 @JSExportTopLevel("IndigoGame")
 object Campfire extends IndigoShader:
 
   val config: GameConfig =
-    GameConfig.default
-      .withFrameRateLimit(FPS.`60`)
+    ShaderConfig.config
       .withViewport(192, 192)
 
-  val assets: Set[AssetType]      = Set()
+  val assets: Set[AssetType]      = ShaderAssets.assets.assetSet
   val channel0: Option[AssetPath] = Option(AssetPath("assets/fire-background.png"))
   val channel1: Option[AssetPath] = Option(AssetPath("assets/campfire.png"))
   val channel2: Option[AssetPath] = None
@@ -96,8 +96,8 @@ object CustomShader:
 
       def fragment(color: vec4): vec4 =
         val fireColor = fire()
-        val bgColor = env.CHANNEL_0
-        val fgColor = env.CHANNEL_1
+        val bgColor   = env.CHANNEL_0
+        val fgColor   = env.CHANNEL_1
 
         mix(mix(bgColor, fireColor, fireColor.a), fgColor, fgColor.a)
     }
