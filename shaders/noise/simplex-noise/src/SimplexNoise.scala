@@ -95,5 +95,9 @@ object CustomShader:
         130.0f * dot(m, g)
 
       def fragment(color: vec4): vec4 =
-        vec4(vec3(snoise(env.UV * 8.0f)), 1.0f)
+        val n = (snoise(env.UV) * 0.25f) +
+          (snoise(env.UV * 2.0f) * 0.25f) +
+          (snoise(env.UV * 8.0f) * 0.25f) +
+          (snoise(env.UV * 32.0f) * 0.25f)
+        vec4(vec3(n), 1.0f)
     }
