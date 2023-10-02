@@ -66,6 +66,14 @@ object shaders extends mill.Module {
         makeIndigoGenerators("generated", "CellularNoiseConfig", "CellularNoiseAssets")
     }
 
+    object `classic-perlin-noise` extends shadermodule.ShaderModule {
+      val indigoOptions: IndigoOptions =
+        makeIndigoOptions("Classic Perlin Noise")
+
+      val indigoGenerators: IndigoGenerators =
+        makeIndigoGenerators("generated", "ClassicPerlinNoiseConfig", "ClassicPerlinNoiseAssets")
+    }
+
     object `gradient-noise` extends shadermodule.ShaderModule {
       val indigoOptions: IndigoOptions =
         makeIndigoOptions("Gradient Noise")
