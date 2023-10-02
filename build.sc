@@ -82,6 +82,14 @@ object shaders extends mill.Module {
         makeIndigoGenerators("generated", "GradientNoiseConfig", "GradientNoiseAssets")
     }
 
+    object `simplex-noise` extends shadermodule.ShaderModule {
+      val indigoOptions: IndigoOptions =
+        makeIndigoOptions("Simplex Noise")
+
+      val indigoGenerators: IndigoGenerators =
+        makeIndigoGenerators("generated", "SimplexNoiseConfig", "SimplexNoiseAssets")
+    }
+
     object `white-noise` extends shadermodule.ShaderModule {
       val indigoOptions: IndigoOptions =
         makeIndigoOptions("White Noise")
