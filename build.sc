@@ -110,6 +110,22 @@ object shaders extends mill.Module {
         makeIndigoGenerators("generated", "SimpleVoronoiConfig", "SimpleVoronoiAssets")
     }
 
+    object stripes extends shadermodule.ShaderModule {
+      val indigoOptions: IndigoOptions =
+        makeIndigoOptions("Stripes")
+
+      val indigoGenerators: IndigoGenerators =
+        makeIndigoGenerators("generated", "StripesConfig", "StripesAssets")
+    }
+
+    object `wavy-stripes` extends shadermodule.ShaderModule {
+      val indigoOptions: IndigoOptions =
+        makeIndigoOptions("WavyStripes")
+
+      val indigoGenerators: IndigoGenerators =
+        makeIndigoGenerators("generated", "WavyStripesConfig", "WavyStripesAssets")
+    }
+
   }
 
   object sdf extends mill.Module {
