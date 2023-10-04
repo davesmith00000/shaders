@@ -126,6 +126,14 @@ object shaders extends mill.Module {
         makeIndigoGenerators("generated", "WavyStripesConfig", "WavyStripesAssets")
     }
 
+    object `weaving-stripes` extends shadermodule.ShaderModule {
+      val indigoOptions: IndigoOptions =
+        makeIndigoOptions("WeavingStripes")
+
+      val indigoGenerators: IndigoGenerators =
+        makeIndigoGenerators("generated", "WeavingStripesConfig", "WeavingStripesAssets")
+    }
+
   }
 
   object sdf extends mill.Module {
