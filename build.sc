@@ -158,6 +158,14 @@ object shaders extends mill.Module {
 
   object shapes extends mill.Module {
 
+    object `coloured-metaballs` extends shadermodule.ShaderModule {
+      val indigoOptions: IndigoOptions =
+        makeIndigoOptions("ColouredMetaballs")
+
+      val indigoGenerators: IndigoGenerators =
+        makeIndigoGenerators("generated", "ColouredMetaballsConfig", "ColouredMetaballsAssets")
+    }
+
     object metaballs extends shadermodule.ShaderModule {
       val indigoOptions: IndigoOptions =
         makeIndigoOptions("Metaballs")
@@ -166,12 +174,12 @@ object shaders extends mill.Module {
         makeIndigoGenerators("generated", "MetaballsConfig", "MetaballsAssets")
     }
 
-    object `coloured-metaballs` extends shadermodule.ShaderModule {
+    object `shiny-metaballs` extends shadermodule.ShaderModule {
       val indigoOptions: IndigoOptions =
-        makeIndigoOptions("ColouredMetaballs")
+        makeIndigoOptions("ShinyMetaballs")
 
       val indigoGenerators: IndigoGenerators =
-        makeIndigoGenerators("generated", "ColouredMetaballsConfig", "ColouredMetaballsAssets")
+        makeIndigoGenerators("generated", "ShinyMetaballsConfig", "ShinyMetaballsAssets")
     }
 
   }
