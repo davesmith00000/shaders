@@ -16,7 +16,6 @@ trait ShaderModule extends MillIndigo with TpolecatModule {
     IndigoOptions.defaults
       .withTitle(title)
       .withWindowSize(400, 400)
-      .useElectronVersion("25.8.4")
       .withAssetDirectory(os.RelPath.rel / "assets")
       .withBackgroundColor("black")
 
