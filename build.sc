@@ -102,6 +102,14 @@ object shaders extends mill.Module {
 
   object patterns extends mill.Module {
 
+    object grid extends shadermodule.ShaderModule {
+      val indigoOptions: IndigoOptions =
+        makeIndigoOptions("Grid")
+
+      val indigoGenerators: IndigoGenerators =
+        makeIndigoGenerators("generated", "GridConfig", "GridAssets")
+    }
+
     object `simple-voronoi` extends shadermodule.ShaderModule {
       val indigoOptions: IndigoOptions =
         makeIndigoOptions("Simple Voronoi")
