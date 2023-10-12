@@ -42,10 +42,13 @@ object CustomShader:
 
         val coloredGrid = col * (vec3(closest, 0.0f) / count)
 
-        val blur = distance(coords, closest / count) * count
+        val blur    = distance(coords, closest / count) * count
         val outline = step(0.95f, mod(env.UV, size) * count)
+        val lines   = max(outline.x, outline.y)
 
-        vec4(coloredGrid * (1.0f - blur), 1.0f)
-        // vec4(vec3(outline, 0.0f), 1.0f)
+        val yellow         = vec3(1.0f, 1.0f, 0.0f)
+        val combinedColour = mix(coloredGrid * (1.0f - blur), yellow, lines)
+
+        vec4(combinedColour, 1.0f)
 
     }
