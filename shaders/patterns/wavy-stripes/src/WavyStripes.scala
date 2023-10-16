@@ -7,9 +7,9 @@ import generated.*
 object WavyStripes extends IndigoShader:
 
   val config: GameConfig =
-    WavyStripesConfig.config.noResize
+    Config.config.noResize
 
-  val assets: Set[AssetType]      = WavyStripesAssets.assets.assetSet
+  val assets: Set[AssetType]      = Assets.assets.assetSet
   val channel0: Option[AssetPath] = None
   val channel1: Option[AssetPath] = None
   val channel2: Option[AssetPath] = None

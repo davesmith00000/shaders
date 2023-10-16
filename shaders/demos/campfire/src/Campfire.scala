@@ -7,9 +7,9 @@ import generated.*
 object Campfire extends IndigoShader:
 
   val config: GameConfig =
-    CampfireConfig.config.noResize
+    Config.config.noResize
 
-  val assets: Set[AssetType]      = CampfireAssets.assets.assetSet
+  val assets: Set[AssetType]      = Assets.assets.assetSet
   val channel0: Option[AssetPath] = Option(AssetPath("assets/fire-background.png"))
   val channel1: Option[AssetPath] = Option(AssetPath("assets/campfire.png"))
   val channel2: Option[AssetPath] = None

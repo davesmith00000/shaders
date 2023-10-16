@@ -7,9 +7,9 @@ import generated.*
 object CellularNoise extends IndigoShader:
 
   val config: GameConfig =
-    CellularNoiseConfig.config.noResize
+    Config.config.noResize
 
-  val assets: Set[AssetType]      = CellularNoiseAssets.assets.assetSet
+  val assets: Set[AssetType]      = Assets.assets.assetSet
   val channel0: Option[AssetPath] = None
   val channel1: Option[AssetPath] = None
   val channel2: Option[AssetPath] = None

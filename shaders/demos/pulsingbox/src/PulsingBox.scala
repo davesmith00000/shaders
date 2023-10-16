@@ -7,9 +7,9 @@ import generated.*
 object PulsingBox extends IndigoShader:
 
   val config: GameConfig =
-    PulsingBoxConfig.config.noResize
+    Config.config.noResize
 
-  val assets: Set[AssetType]      = PulsingBoxAssets.assets.assetSet
+  val assets: Set[AssetType]      = Assets.assets.assetSet
   val channel0: Option[AssetPath] = None
   val channel1: Option[AssetPath] = None
   val channel2: Option[AssetPath] = None

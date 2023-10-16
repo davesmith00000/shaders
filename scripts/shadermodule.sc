@@ -3,14 +3,16 @@ import mill.scalalib._
 import mill.scalajslib._
 import mill.scalajslib.api._
 
-import $ivy.`io.indigoengine::mill-indigo:0.15.0`, millindigo._
+import $ivy.`io.indigoengine::mill-indigo:0.15.1`, millindigo._
 
 import $ivy.`io.github.davidgregory084::mill-tpolecat::0.3.5`
 import io.github.davidgregory084.TpolecatModule
 
 trait ShaderModule extends MillIndigo with TpolecatModule {
   def scalaVersion   = "3.3.1"
-  def scalaJSVersion = "1.13.2"
+  def scalaJSVersion = "1.14.0"
+
+  def indigoOptions: IndigoOptions
 
   def makeIndigoOptions(title: String): IndigoOptions =
     IndigoOptions.defaults
@@ -19,11 +21,10 @@ trait ShaderModule extends MillIndigo with TpolecatModule {
       .withAssetDirectory(os.RelPath.rel / "assets")
       .withBackgroundColor("black")
 
-  def makeIndigoGenerators(fqpn: String, configFileName: String, assetsFileName: String): IndigoGenerators =
-    IndigoGenerators
-      .mill(fqpn)
-      .generateConfig(configFileName, indigoOptions)
-      .listAssets(assetsFileName, indigoOptions.assets)
+  def indigoGenerators: IndigoGenerators =
+    IndigoGenerators("generated")
+      .generateConfig("Config", indigoOptions)
+      .listAssets("Assets", indigoOptions.assets)
 
   def buildGame() =
     T.command {
@@ -61,7 +62,7 @@ trait ShaderModule extends MillIndigo with TpolecatModule {
       }
     }
 
-  val indigoVersion = "0.15.0"
+  val indigoVersion = "0.15.1"
 
   def ivyDeps =
     Agg(

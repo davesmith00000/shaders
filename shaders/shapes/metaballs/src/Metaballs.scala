@@ -7,9 +7,9 @@ import generated.*
 object Metaballs extends IndigoShader:
 
   val config: GameConfig =
-    MetaballsConfig.config.noResize
+    Config.config.noResize
 
-  val assets: Set[AssetType]      = MetaballsAssets.assets.assetSet
+  val assets: Set[AssetType]      = Assets.assets.assetSet
   val channel0: Option[AssetPath] = None
   val channel1: Option[AssetPath] = None
   val channel2: Option[AssetPath] = None
@@ -41,7 +41,7 @@ object CustomShader:
         val uv: vec2 = (2.0f * env.SCREEN_COORDS - env.SIZE) / env.SIZE.y
 
         var acc: Float = 0.0f
-        val count       = 20.0f
+        val count      = 20.0f
 
         _for(1.0f, _ < count, _ + 1.0f) { i =>
           val p: vec2      = sin(N22(vec2(i)) * env.TIME)
