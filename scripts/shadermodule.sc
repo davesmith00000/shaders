@@ -3,7 +3,7 @@ import mill.scalalib._
 import mill.scalajslib._
 import mill.scalajslib.api._
 
-import $ivy.`io.indigoengine::mill-indigo:0.15.1`, millindigo._
+import $ivy.`io.indigoengine::mill-indigo:0.15.2`, millindigo._
 
 import $ivy.`io.github.davidgregory084::mill-tpolecat::0.3.5`
 import io.github.davidgregory084.TpolecatModule
@@ -62,7 +62,7 @@ trait ShaderModule extends MillIndigo with TpolecatModule {
       }
     }
 
-  val indigoVersion = "0.15.1"
+  val indigoVersion = "0.15.2"
 
   def ivyDeps =
     Agg(
