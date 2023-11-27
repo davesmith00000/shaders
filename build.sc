@@ -114,6 +114,11 @@ object shaders extends mill.Module {
         makeIndigoOptions("Square SDF")
     }
 
+    object star extends shadermodule.ShaderModule {
+      val indigoOptions: IndigoOptions =
+        makeIndigoOptions("Star")
+    }
+
   }
 
   object shapes extends mill.Module {
