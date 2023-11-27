@@ -80,6 +80,11 @@ object shaders extends mill.Module {
         makeIndigoOptions("Grid")
     }
 
+    object rainbow extends shadermodule.ShaderModule {
+      val indigoOptions: IndigoOptions =
+        makeIndigoOptions("Rainbow")
+    }
+
     object `simple-voronoi` extends shadermodule.ShaderModule {
       val indigoOptions: IndigoOptions =
         makeIndigoOptions("Simple Voronoi")
