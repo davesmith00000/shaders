@@ -8,7 +8,7 @@ import generated.*
   */
 
 @JSExportTopLevel("IndigoGame")
-object Doughnut extends IndigoShader:
+object DoughnutNormal extends IndigoShader:
 
   val config: GameConfig =
     Config.config.noResize
@@ -32,21 +32,29 @@ object CustomShader:
 
   import ultraviolet.syntax.*
 
-  // Based on work by Inigo Quilez
-  // https://iquilezles.org/articles/distfunctions2d/
   inline def fragment: Shader[FragmentEnv, Unit] =
     Shader[FragmentEnv] { env =>
-
-      def heightValue(d: Float, m: Float): Float =
-        ((cos(d * env.PI * m) * 0.5f) + 0.5f) * min(step(-1.0f / m, d), 1.0f - step(1.0f / m, d))
 
       def sdCircle(p: vec2, r: Float): Float =
         length(p) - r
 
+      def rateOfChange(d: Float, m: Float): Float =
+        val c = (cos((d - 0.25f) * env.PI * m) * 0.5f) + 0.5f
+        c * min(step(-2.0f / m, d), 1.0f - step(2.0f / m, d))
+
       def fragment(color: vec4): vec4 =
+        val p   = env.UV - 0.5f
+        val sdf = sdCircle(p, 0.25f)
 
-        val sdf    = sdCircle(env.UV - 0.5f, 0.25f)
-        val height = heightValue(sdf, 10.0f)
+        val normalised = normalize(p)
+        var d          = if sdf < 0.0f then -normalised else normalised
+        d = clamp(d, vec2(-1.0f), vec2(1.0f))
+        d = (d + 1.0f) * 0.5f
 
-        vec4(vec3(height), 1.0f)
+        val curve = clamp(rateOfChange(sdf, 20.0f), 0.0f, 1.0f)
+
+        val normalColor = vec4(d, 1.0f, 1.0f)
+        val baseColor   = vec4(0.5f, 0.5f, 1.0f, 1.0f)
+
+        mix(baseColor, normalColor, curve)
     }

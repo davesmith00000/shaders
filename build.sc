@@ -138,6 +138,11 @@ object shaders extends mill.Module {
         makeIndigoOptions("Doughnut")
     }
 
+    object `doughnut-normal` extends shadermodule.ShaderModule {
+      val indigoOptions: IndigoOptions =
+        makeIndigoOptions("DoughnutNormal")
+    }
+
     object metaballs extends shadermodule.ShaderModule {
       val indigoOptions: IndigoOptions =
         makeIndigoOptions("Metaballs")
