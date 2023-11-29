@@ -32,6 +32,11 @@ object CustomShader:
 
   import ultraviolet.syntax.*
 
+  /*
+  GraphToy:
+  ((cos((x - 0.25) * PI * 4.0) * 0.5) + 0.5) * min(step(-0.5, x), 1.0 - step(0.5, x))
+   */
+
   inline def fragment: Shader[FragmentEnv, Unit] =
     Shader[FragmentEnv] { env =>
 

@@ -32,6 +32,11 @@ object CustomShader:
 
   import ultraviolet.syntax.*
 
+  /*
+    GraphToy:
+    1.0 - step(0.5, x)
+  */
+
   @SuppressWarnings(Array("scalafix:DisableSyntax.var"))
   inline def fragment: Shader[FragmentEnv, Unit] =
     Shader[FragmentEnv] { env =>
