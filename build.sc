@@ -42,6 +42,11 @@ object shaders extends mill.Module {
         makeIndigoOptions("PulsingBox")
     }
 
+    object star extends shadermodule.ShaderModule {
+      val indigoOptions: IndigoOptions =
+        makeIndigoOptions("StarDemo")
+    }
+
   }
 
   object noise extends mill.Module {
