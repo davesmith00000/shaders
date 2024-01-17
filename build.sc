@@ -42,9 +42,9 @@ object shaders extends mill.Module {
         makeIndigoOptions("PulsingBox")
     }
 
-    object star extends shadermodule.ShaderModule {
+    object `glowing-star` extends shadermodule.ShaderModule {
       val indigoOptions: IndigoOptions =
-        makeIndigoOptions("StarDemo")
+        makeIndigoOptions("Glowing Star")
     }
 
   }

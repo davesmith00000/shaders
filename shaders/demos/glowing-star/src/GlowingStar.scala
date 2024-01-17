@@ -4,7 +4,7 @@ import scala.scalajs.js.annotation.*
 import generated.*
 
 @JSExportTopLevel("IndigoGame")
-object StarDemo extends IndigoShader:
+object GlowingStar extends IndigoShader:
 
   val config: GameConfig =
     Config.config.noResize
